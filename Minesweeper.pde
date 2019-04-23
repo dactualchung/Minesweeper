@@ -45,26 +45,38 @@ public void draw ()
 public boolean isWon()
 {
     //your code here
-    int unMarkedcount = 0;
-    for(int ra = 0; ra < buttons.length; ra++){
-      for(int co = 0; co < buttons[ra].length; co++){
-        if(!buttons[ra][co].isMarked()){
-          unMarkedcount++;
-        }
+  for (int i = 0; i < NUM_ROWS; i++){
+    for (int j = 0; j < NUM_COLS; j++) {
+      if (!bombs.contains(buttons[i][j]) && buttons[i][j].isClicked() == false){
+        return false;
       }
     }
-    if(unMarkedcount == bombs.size()){
-      return true;
-    }
-    return false;
+  } 
+  return true;
 }
 public void displayLosingMessage()
 {
-    //your code here
+  buttons[10][7].setLabel("L");
+  buttons[10][8].setLabel("O");
+  buttons[10][9].setLabel("S");
+  buttons[10][10].setLabel("E");
+  buttons[10][11].setLabel("R");
+  for(int i = 0; i < NUM_ROWS; i++){
+    for(int j = 0; j < NUM_COLS; j++) {
+      if(bombs.contains(buttons[i][j]) && (buttons[i][j].isClicked() == false)){
+         buttons[i][j].mousePressed();
+      }
+    }
+  }
 }
 public void displayWinningMessage()
 {
-    println("You Won!");
+  buttons[10][7].setLabel("W");
+  buttons[10][8].setLabel("I");
+  buttons[10][9].setLabel("N");
+  buttons[10][10].setLabel("N");
+  buttons[10][11].setLabel("E");
+  buttons[10][12].setLabel("R");
 }
 
 public class MSButton
